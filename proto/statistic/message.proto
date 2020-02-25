@@ -7,4 +7,5 @@ service SystemSvc {
   rpc GetCountAPI (go.api.Request) returns (go.api.Response);
   rpc GetMapDirectionAPI (go.api.Request) returns (go.api.Response);
   rpc SendObserverEmailAPI (go.api.Request) returns (go.api.Response);
+  rpc GetChartData(go.api.Request) returns (go.api.Response);
 }

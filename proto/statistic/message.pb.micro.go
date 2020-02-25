@@ -39,6 +39,7 @@ type SystemSvcService interface {
 	GetCountAPI(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 	GetMapDirectionAPI(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 	SendObserverEmailAPI(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
+	GetChartData(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 }
 
 type systemSvcService struct {
@@ -99,6 +100,16 @@ func (c *systemSvcService) SendObserverEmailAPI(ctx context.Context, in *proto1.
 	return out, nil
 }
 
+func (c *systemSvcService) GetChartData(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error) {
+	req := c.c.NewRequest(c.name, "SystemSvc.GetChartData", in)
+	out := new(proto1.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for SystemSvc service
 
 type SystemSvcHandler interface {
@@ -106,6 +117,7 @@ type SystemSvcHandler interface {
 	GetCountAPI(context.Context, *proto1.Request, *proto1.Response) error
 	GetMapDirectionAPI(context.Context, *proto1.Request, *proto1.Response) error
 	SendObserverEmailAPI(context.Context, *proto1.Request, *proto1.Response) error
+	GetChartData(context.Context, *proto1.Request, *proto1.Response) error
 }
 
 func RegisterSystemSvcHandler(s server.Server, hdlr SystemSvcHandler, opts ...server.HandlerOption) error {
@@ -114,6 +126,7 @@ func RegisterSystemSvcHandler(s server.Server, hdlr SystemSvcHandler, opts ...se
 		GetCountAPI(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 		GetMapDirectionAPI(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 		SendObserverEmailAPI(ctx context.Context, in *proto1.Request, out *proto1.Response) error
+		GetChartData(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 	}
 	type SystemSvc struct {
 		systemSvc
@@ -140,4 +153,8 @@ func (h *systemSvcHandler) GetMapDirectionAPI(ctx context.Context, in *proto1.Re
 
 func (h *systemSvcHandler) SendObserverEmailAPI(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
 	return h.SystemSvcHandler.SendObserverEmailAPI(ctx, in, out)
+}
+
+func (h *systemSvcHandler) GetChartData(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
+	return h.SystemSvcHandler.GetChartData(ctx, in, out)
 }
