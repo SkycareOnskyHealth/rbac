@@ -40,8 +40,6 @@ type IotSvcService interface {
 	GetThing(ctx context.Context, in *ThingRequest, opts ...client.CallOption) (*ThingResponse, error)
 	ExcuteTemplate(ctx context.Context, in *DataRequest, opts ...client.CallOption) (*DataResponse, error)
 	Log(ctx context.Context, in *DataRequest, opts ...client.CallOption) (*DataResponse, error)
-	HistoryBySerial(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
-	HistoryByCustomer(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 	GetDeviceMapFail(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 	CountThing(ctx context.Context, in *wrappers.StringValue, opts ...client.CallOption) (*wrappers.Int64Value, error)
 }
@@ -104,26 +102,6 @@ func (c *iotSvcService) Log(ctx context.Context, in *DataRequest, opts ...client
 	return out, nil
 }
 
-func (c *iotSvcService) HistoryBySerial(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error) {
-	req := c.c.NewRequest(c.name, "IotSvc.HistoryBySerial", in)
-	out := new(proto1.Response)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *iotSvcService) HistoryByCustomer(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error) {
-	req := c.c.NewRequest(c.name, "IotSvc.HistoryByCustomer", in)
-	out := new(proto1.Response)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *iotSvcService) GetDeviceMapFail(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error) {
 	req := c.c.NewRequest(c.name, "IotSvc.GetDeviceMapFail", in)
 	out := new(proto1.Response)
@@ -151,8 +129,6 @@ type IotSvcHandler interface {
 	GetThing(context.Context, *ThingRequest, *ThingResponse) error
 	ExcuteTemplate(context.Context, *DataRequest, *DataResponse) error
 	Log(context.Context, *DataRequest, *DataResponse) error
-	HistoryBySerial(context.Context, *proto1.Request, *proto1.Response) error
-	HistoryByCustomer(context.Context, *proto1.Request, *proto1.Response) error
 	GetDeviceMapFail(context.Context, *proto1.Request, *proto1.Response) error
 	CountThing(context.Context, *wrappers.StringValue, *wrappers.Int64Value) error
 }
@@ -163,8 +139,6 @@ func RegisterIotSvcHandler(s server.Server, hdlr IotSvcHandler, opts ...server.H
 		GetThing(ctx context.Context, in *ThingRequest, out *ThingResponse) error
 		ExcuteTemplate(ctx context.Context, in *DataRequest, out *DataResponse) error
 		Log(ctx context.Context, in *DataRequest, out *DataResponse) error
-		HistoryBySerial(ctx context.Context, in *proto1.Request, out *proto1.Response) error
-		HistoryByCustomer(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 		GetDeviceMapFail(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 		CountThing(ctx context.Context, in *wrappers.StringValue, out *wrappers.Int64Value) error
 	}
@@ -193,14 +167,6 @@ func (h *iotSvcHandler) ExcuteTemplate(ctx context.Context, in *DataRequest, out
 
 func (h *iotSvcHandler) Log(ctx context.Context, in *DataRequest, out *DataResponse) error {
 	return h.IotSvcHandler.Log(ctx, in, out)
-}
-
-func (h *iotSvcHandler) HistoryBySerial(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
-	return h.IotSvcHandler.HistoryBySerial(ctx, in, out)
-}
-
-func (h *iotSvcHandler) HistoryByCustomer(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
-	return h.IotSvcHandler.HistoryByCustomer(ctx, in, out)
 }
 
 func (h *iotSvcHandler) GetDeviceMapFail(ctx context.Context, in *proto1.Request, out *proto1.Response) error {

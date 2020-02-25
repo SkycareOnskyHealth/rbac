@@ -8,8 +8,6 @@ service IotSvc {
 	rpc GetThing(ThingRequest) returns (ThingResponse) {}
 	rpc ExcuteTemplate(DataRequest) returns (DataResponse) {}
 	rpc Log(DataRequest) returns (DataResponse) {}
-    rpc HistoryBySerial (go.api.Request) returns (go.api.Response);
-    rpc HistoryByCustomer (go.api.Request) returns (go.api.Response);
     rpc GetDeviceMapFail (go.api.Request) returns (go.api.Response);
 	rpc CountThing (google.protobuf.StringValue) returns (google.protobuf.Int64Value);
 }
