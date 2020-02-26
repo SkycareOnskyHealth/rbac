@@ -7,6 +7,7 @@ import "github.com/micro/go-micro/api/proto/api.proto";
 service SecurityCalling {
   rpc UpdateCall(go.api.Request) returns(go.api.Response) { }
   rpc UpdateMessage(go.api.Request) returns(go.api.Response) { }
+  rpc CallAndMessageStatistic (go.api.Request) returns (go.api.Response){ }
 }
 
 service SecurityCallingSvc {
