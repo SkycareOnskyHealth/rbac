@@ -63,7 +63,7 @@ type Policy struct {
 	Description    string         `pg:"description,type:varchar(255)" json:"description,omitempty"`
 	CustomerNumber string         `pg:"customer_number,type:varchar(32)" json:"customer_number,omitempty"`
 	Version        string         `pg:"version,type:varchar(255)" json:"version,omitempty"`
-	Type           PolicyType     `pg:"type,type:enum_policy_type" json:"type"`
+	Type           PolicyType     `pg:"type" json:"type"`
 	ResourceTypes  []ResourceType `pg:"resource_types" json:"resourceTypes,omitempty"`
 	IsActive       bool           `pg:"is_active"`
 	User           *User
@@ -71,10 +71,11 @@ type Policy struct {
 }
 
 type ResourceType struct {
-	Name      string   `json:"name,omitempty" yaml:"name,omitempty"`
-	Effect    string   `json:"effect,omitempty" yaml:"effect,omitempty"`
-	Actions   []string `json:"actions,omitempty" yaml:"actions,omitempty"`
-	Resources []string `json:"resources,omitempty" yaml:"resources,omitempty"`
+	Name         string   `json:"name,omitempty" yaml:"name,omitempty"`
+	Effect       string   `json:"effect,omitempty" yaml:"effect,omitempty"`
+	Actions      []string `json:"actions,omitempty" yaml:"actions,omitempty"`
+	ResourceType string   `json:"resourceType,omitempty"`
+	Resources    []string `json:"resources,omitempty" yaml:"resources,omitempty"`
 }
 type UserInterface struct {
 	ID             int
