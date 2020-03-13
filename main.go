@@ -4,3 +4,6 @@ package rbac
 func Foo() string {
 	return "Bar"
 }
+func main() {
+	Foo()
+}
