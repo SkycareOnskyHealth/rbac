@@ -1,4 +1,4 @@
-package model
+package iot
 
 import (
 	"encoding/json"
@@ -19,6 +19,18 @@ type Data struct {
 	ThingId          int             `json:"thingId"`
 	TemplateId       int             `json:"templateId"`
 	Alerts           []AlerDataModel `json:"alerts"`
+}
+type DataLog struct {
+	CustomerNumber   string   `json:"customerNumber"`
+	ThingName        string   `json:"thingName"`
+	ThingDisplayName string   `json:"thingDisplayName"`
+	ThingSerial      string   `json:"serial"`
+	PropertyName     string   `json:"propertyName"`
+	DataType         DataType `json:"dataType"`
+	Value            string   `json:"value"`
+	PropertyId       int      `json:"propertyId"`
+	ThingId          int      `json:"thingId"`
+	Time             int      `json:"time"`
 }
 
 func (b Data) String() string {

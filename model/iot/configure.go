@@ -1,4 +1,4 @@
-package model
+package iot
 
 type Configure struct {
 	Id   *int   `json:"id,omitempty"`

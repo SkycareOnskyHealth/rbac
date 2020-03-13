@@ -1,7 +1,7 @@
-package model
+package authen
 
 type GroupCache struct {
-	ID            int            `json:"id"`
+	ID         int    `json:"id"`
 	Name       string ` json:"name"`
 	Uuid       string ` json:"uuid"`
 	CustomerID int    ` json:"-"`

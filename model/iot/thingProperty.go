@@ -1,4 +1,4 @@
-package model
+package iot
 
 import model "github.com/onskycloud/rbac/model"
 

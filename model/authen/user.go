@@ -1,8 +1,8 @@
-package model
+package authen
 
 // User represents user domain model
 type User struct {
-	ID            int            `json:"id"`
+	ID       int    `json:"id"`
 	Uuid     string `json:"uuid"`
 	Username string `json:"username"`
 	Active   bool   `json:"active"`

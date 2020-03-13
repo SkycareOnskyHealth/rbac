@@ -1,4 +1,4 @@
-package model
+package authen
 
 // AuthUser represents data stored in JWT token for user
 type AuthUser struct {

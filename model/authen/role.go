@@ -1,4 +1,4 @@
-package model
+package authen
 
 // AccessRole represents access role type
 type AccessRole int8
@@ -39,6 +39,7 @@ func (s AccessRole) String() string {
 		return "Unknown"
 	}
 }
+
 // Role model
 type Role struct {
 	ID          int        `json:"id"`
