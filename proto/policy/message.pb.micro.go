@@ -269,6 +269,7 @@ type SystemService interface {
 	BindUserPolicy(ctx context.Context, in *BindUserPolicyRequest, opts ...client.CallOption) (*BindResponse, error)
 	GetSystemPolicies(ctx context.Context, in *GetSystemPoliciesRequest, opts ...client.CallOption) (*GetSystemPoliciesResponse, error)
 	GetSystemPoliciesByUserId(ctx context.Context, in *UserIdRequest, opts ...client.CallOption) (*GetSystemPoliciesByUserIdResponse, error)
+	GetSystemPolicyByName(ctx context.Context, in *PolicyNameRequest, opts ...client.CallOption) (*PolicyData, error)
 }
 
 type systemService struct {
@@ -329,6 +330,16 @@ func (c *systemService) GetSystemPoliciesByUserId(ctx context.Context, in *UserI
 	return out, nil
 }
 
+func (c *systemService) GetSystemPolicyByName(ctx context.Context, in *PolicyNameRequest, opts ...client.CallOption) (*PolicyData, error) {
+	req := c.c.NewRequest(c.name, "System.GetSystemPolicyByName", in)
+	out := new(PolicyData)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for System service
 
 type SystemHandler interface {
@@ -336,6 +347,7 @@ type SystemHandler interface {
 	BindUserPolicy(context.Context, *BindUserPolicyRequest, *BindResponse) error
 	GetSystemPolicies(context.Context, *GetSystemPoliciesRequest, *GetSystemPoliciesResponse) error
 	GetSystemPoliciesByUserId(context.Context, *UserIdRequest, *GetSystemPoliciesByUserIdResponse) error
+	GetSystemPolicyByName(context.Context, *PolicyNameRequest, *PolicyData) error
 }
 
 func RegisterSystemHandler(s server.Server, hdlr SystemHandler, opts ...server.HandlerOption) error {
@@ -344,6 +356,7 @@ func RegisterSystemHandler(s server.Server, hdlr SystemHandler, opts ...server.H
 		BindUserPolicy(ctx context.Context, in *BindUserPolicyRequest, out *BindResponse) error
 		GetSystemPolicies(ctx context.Context, in *GetSystemPoliciesRequest, out *GetSystemPoliciesResponse) error
 		GetSystemPoliciesByUserId(ctx context.Context, in *UserIdRequest, out *GetSystemPoliciesByUserIdResponse) error
+		GetSystemPolicyByName(ctx context.Context, in *PolicyNameRequest, out *PolicyData) error
 	}
 	type System struct {
 		system
@@ -370,6 +383,10 @@ func (h *systemHandler) GetSystemPolicies(ctx context.Context, in *GetSystemPoli
 
 func (h *systemHandler) GetSystemPoliciesByUserId(ctx context.Context, in *UserIdRequest, out *GetSystemPoliciesByUserIdResponse) error {
 	return h.SystemHandler.GetSystemPoliciesByUserId(ctx, in, out)
+}
+
+func (h *systemHandler) GetSystemPolicyByName(ctx context.Context, in *PolicyNameRequest, out *PolicyData) error {
+	return h.SystemHandler.GetSystemPolicyByName(ctx, in, out)
 }
 
 // Client API for Group service
