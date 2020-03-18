@@ -23,6 +23,7 @@ service System {
     rpc BindUserPolicy (BindUserPolicyRequest) returns (BindResponse);
     rpc GetSystemPolicies(GetSystemPoliciesRequest) returns (GetSystemPoliciesResponse);
     rpc GetSystemPoliciesByUserId(UserIdRequest) returns (GetSystemPoliciesByUserIdResponse);
+    rpc GetSystemPolicyByName(PolicyNameRequest) returns (PolicyData);
 }
 
 /*************************************** GROUP POLICY *********************************************************/
