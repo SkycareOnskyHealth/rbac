@@ -41,6 +41,7 @@ type SystemSvcService interface {
 	SendObserverEmailAPI(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 	GetChartData(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 	HistoryBySerial(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
+	HeartRateStatistic(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 }
 
 type systemSvcService struct {
@@ -121,6 +122,16 @@ func (c *systemSvcService) HistoryBySerial(ctx context.Context, in *proto1.Reque
 	return out, nil
 }
 
+func (c *systemSvcService) HeartRateStatistic(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error) {
+	req := c.c.NewRequest(c.name, "SystemSvc.HeartRateStatistic", in)
+	out := new(proto1.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for SystemSvc service
 
 type SystemSvcHandler interface {
@@ -130,6 +141,7 @@ type SystemSvcHandler interface {
 	SendObserverEmailAPI(context.Context, *proto1.Request, *proto1.Response) error
 	GetChartData(context.Context, *proto1.Request, *proto1.Response) error
 	HistoryBySerial(context.Context, *proto1.Request, *proto1.Response) error
+	HeartRateStatistic(context.Context, *proto1.Request, *proto1.Response) error
 }
 
 func RegisterSystemSvcHandler(s server.Server, hdlr SystemSvcHandler, opts ...server.HandlerOption) error {
@@ -140,6 +152,7 @@ func RegisterSystemSvcHandler(s server.Server, hdlr SystemSvcHandler, opts ...se
 		SendObserverEmailAPI(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 		GetChartData(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 		HistoryBySerial(ctx context.Context, in *proto1.Request, out *proto1.Response) error
+		HeartRateStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 	}
 	type SystemSvc struct {
 		systemSvc
@@ -174,4 +187,8 @@ func (h *systemSvcHandler) GetChartData(ctx context.Context, in *proto1.Request,
 
 func (h *systemSvcHandler) HistoryBySerial(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
 	return h.SystemSvcHandler.HistoryBySerial(ctx, in, out)
+}
+
+func (h *systemSvcHandler) HeartRateStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
+	return h.SystemSvcHandler.HeartRateStatistic(ctx, in, out)
 }
