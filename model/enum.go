@@ -61,6 +61,7 @@ const (
 	TempHumd
 	DoorLock
 	OSLocus
+	BedSensor
 )
 
 // Mode Type constant
@@ -104,6 +105,11 @@ const (
 	LowBatteryMessage           = "battery_low"
 	FullBatteryMessage          = "battery_full"
 	VibrationMessage            = "vibration"
+    BedSensorHeartStopMessage = "bed_sensor_heart_stop"
+    BedSensorApneaMessage = "bed_sensor_apnea"
+    BedSensorTachycardiaMessage = "bed_sensor_tachycardia"
+    BedSensorBradycardiaMessage = "bed_sensor_bradycardia"
+    BedSensorBrainDisorderMessage = "bed_sensor_brain_disorder"
 )
 
 // Template type constant
@@ -254,6 +260,8 @@ func (s SecurityType) String() string {
 		return "DoorLock"
 	case OSLocus:
 		return "OS Locus"
+	case BedSensor:
+		return "Bed Sensor"
 	default:
 		return "Motion"
 	}
@@ -306,6 +314,11 @@ const (
 	OSLocusSOS
 	LowBattery
 	Vibration
+	BedSensorHeartStop
+	BedSensorApnea
+	BedSensorTachycardia
+	BedSensorBradycardia
+	BedSensorBrainDisorder
 	Complex
 )
 
@@ -341,6 +354,16 @@ func (s NotificationType) String() string {
 		return "LowBattery"
 	case Vibration:
 		return "Vibration"
+	case BedSensorHeartStop:
+		return "BedSensorHeartStop"
+	case BedSensorApnea:
+		return "BedSensorApnea"
+	case BedSensorTachycardia:
+		return "BedSensorTachycardia"
+	case BedSensorBradycardia:
+		return "BedSensorBradycardia"
+	case BedSensorBrainDisorder:
+		return "BedSensorBrainDisorder"
 	default:
 		return "Simple"
 	}
