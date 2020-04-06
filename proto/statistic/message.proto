@@ -10,4 +10,5 @@ service SystemSvc {
   rpc GetChartData(go.api.Request) returns (go.api.Response);
   rpc HistoryBySerial (go.api.Request) returns (go.api.Response);
   rpc HeartRateStatistic (go.api.Request) returns (go.api.Response);
+  rpc SnoringStatistic (go.api.Request) returns (go.api.Response);
 }
