@@ -82,7 +82,7 @@ message UserIdRequest {
 message PolicyData {
 
     // PolicyID represent policy_id
-    string policy_id = 1;
+    string policyId = 1;
     
     // Customer number
     string customer_number = 2;
