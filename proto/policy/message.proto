@@ -109,7 +109,7 @@ message PolicyData {
 // Policy's resource type message
 message ResourceTypes {
     string name = 1;
-    string effect = 2 [(validate.rules).string = {in: ["allow", "deny"]}];
+    string effect = 2 [(validate.rules).string = {in: ["Allow", "Deny"]}];
     repeated string actions = 3 [(validate.rules).repeated.min_items = 1];
     repeated string resources = 4 [(validate.rules).repeated.min_items = 1];
 }

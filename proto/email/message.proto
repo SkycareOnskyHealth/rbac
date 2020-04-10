@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-package system.micro.srv.email;
 
 service EmailSvc {
     rpc Send(EmailRequest) returns(EmailResponse) { }

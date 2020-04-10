@@ -500,7 +500,7 @@ func (m *ResourceTypes) Validate() error {
 	if _, ok := _ResourceTypes_Effect_InLookup[m.GetEffect()]; !ok {
 		return ResourceTypesValidationError{
 			field:  "Effect",
-			reason: "value must be in list [allow deny]",
+			reason: "value must be in list [Allow Deny]",
 		}
 	}
 
@@ -576,8 +576,8 @@ var _ interface {
 } = ResourceTypesValidationError{}
 
 var _ResourceTypes_Effect_InLookup = map[string]struct{}{
-	"allow": {},
-	"deny":  {},
+	"Allow": {},
+	"Deny":  {},
 }
 
 // Validate checks the field values on ListPoliciesRequest with the rules
