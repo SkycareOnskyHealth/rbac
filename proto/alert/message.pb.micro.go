@@ -38,6 +38,8 @@ type AlertSrvService interface {
 	CheckAlert(ctx context.Context, in *AlertRequest, opts ...client.CallOption) (*AlertResponse, error)
 	GetAlertTypes(ctx context.Context, in *AlertTypeRequest, opts ...client.CallOption) (*AlertTypeResponse, error)
 	GetAlertTypesAPI(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
+	ScheduleStatusAPI(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
+	ScheduleActionAPI(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 }
 
 type alertSrvService struct {
@@ -88,12 +90,34 @@ func (c *alertSrvService) GetAlertTypesAPI(ctx context.Context, in *proto1.Reque
 	return out, nil
 }
 
+func (c *alertSrvService) ScheduleStatusAPI(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error) {
+	req := c.c.NewRequest(c.name, "AlertSrv.ScheduleStatusAPI", in)
+	out := new(proto1.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alertSrvService) ScheduleActionAPI(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error) {
+	req := c.c.NewRequest(c.name, "AlertSrv.ScheduleActionAPI", in)
+	out := new(proto1.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for AlertSrv service
 
 type AlertSrvHandler interface {
 	CheckAlert(context.Context, *AlertRequest, *AlertResponse) error
 	GetAlertTypes(context.Context, *AlertTypeRequest, *AlertTypeResponse) error
 	GetAlertTypesAPI(context.Context, *proto1.Request, *proto1.Response) error
+	ScheduleStatusAPI(context.Context, *proto1.Request, *proto1.Response) error
+	ScheduleActionAPI(context.Context, *proto1.Request, *proto1.Response) error
 }
 
 func RegisterAlertSrvHandler(s server.Server, hdlr AlertSrvHandler, opts ...server.HandlerOption) error {
@@ -101,6 +125,8 @@ func RegisterAlertSrvHandler(s server.Server, hdlr AlertSrvHandler, opts ...serv
 		CheckAlert(ctx context.Context, in *AlertRequest, out *AlertResponse) error
 		GetAlertTypes(ctx context.Context, in *AlertTypeRequest, out *AlertTypeResponse) error
 		GetAlertTypesAPI(ctx context.Context, in *proto1.Request, out *proto1.Response) error
+		ScheduleStatusAPI(ctx context.Context, in *proto1.Request, out *proto1.Response) error
+		ScheduleActionAPI(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 	}
 	type AlertSrv struct {
 		alertSrv
@@ -123,4 +149,12 @@ func (h *alertSrvHandler) GetAlertTypes(ctx context.Context, in *AlertTypeReques
 
 func (h *alertSrvHandler) GetAlertTypesAPI(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
 	return h.AlertSrvHandler.GetAlertTypesAPI(ctx, in, out)
+}
+
+func (h *alertSrvHandler) ScheduleStatusAPI(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
+	return h.AlertSrvHandler.ScheduleStatusAPI(ctx, in, out)
+}
+
+func (h *alertSrvHandler) ScheduleActionAPI(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
+	return h.AlertSrvHandler.ScheduleActionAPI(ctx, in, out)
 }

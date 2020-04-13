@@ -6,6 +6,8 @@ service AlertSrv {
   rpc CheckAlert(AlertRequest) returns (AlertResponse) {}
   rpc GetAlertTypes(AlertTypeRequest) returns (AlertTypeResponse) {}
   rpc GetAlertTypesAPI (go.api.Request) returns (go.api.Response);
+  rpc ScheduleStatusAPI (go.api.Request) returns (go.api.Response);
+  rpc ScheduleActionAPI (go.api.Request) returns (go.api.Response);
 }
 
 message AlertRequest {
