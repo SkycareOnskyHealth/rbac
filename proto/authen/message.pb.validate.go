@@ -777,3 +777,88 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = AuthUserValidationError{}
+
+// Validate checks the field values on DeviceTokenResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *DeviceTokenResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for UserId
+
+	// no validation rules for Ip
+
+	// no validation rules for Location
+
+	// no validation rules for Lat
+
+	// no validation rules for Long
+
+	// no validation rules for Active
+
+	// no validation rules for IsMainDevice
+
+	// no validation rules for DeviceToken
+
+	// no validation rules for DeviceType
+
+	return nil
+}
+
+// DeviceTokenResponseValidationError is the validation error returned by
+// DeviceTokenResponse.Validate if the designated constraints aren't met.
+type DeviceTokenResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeviceTokenResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeviceTokenResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeviceTokenResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeviceTokenResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeviceTokenResponseValidationError) ErrorName() string {
+	return "DeviceTokenResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeviceTokenResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeviceTokenResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeviceTokenResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeviceTokenResponseValidationError{}

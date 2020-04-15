@@ -41,6 +41,8 @@ type AuthenSvcService interface {
 	GetCustomerByEmail(ctx context.Context, in *CustomerByUserNameRequest, opts ...client.CallOption) (*CustomerResponse, error)
 	VerifyPermission(ctx context.Context, in *VerifyPermissionRequest, opts ...client.CallOption) (*VerifyPermissionResponse, error)
 	CountCustomer(ctx context.Context, in *empty.Empty, opts ...client.CallOption) (*wrappers.Int64Value, error)
+	//rpc VerifyPermissionFromContext(VerifyPermissionRequest) returns (VerifyPermissionResponse) {}
+	GetDeviceToken(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*DeviceTokenResponse, error)
 }
 
 type authenSvcService struct {
@@ -111,6 +113,16 @@ func (c *authenSvcService) CountCustomer(ctx context.Context, in *empty.Empty, o
 	return out, nil
 }
 
+func (c *authenSvcService) GetDeviceToken(ctx context.Context, in *CustomerRequest, opts ...client.CallOption) (*DeviceTokenResponse, error) {
+	req := c.c.NewRequest(c.name, "AuthenSvc.GetDeviceToken", in)
+	out := new(DeviceTokenResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for AuthenSvc service
 
 type AuthenSvcHandler interface {
@@ -119,6 +131,8 @@ type AuthenSvcHandler interface {
 	GetCustomerByEmail(context.Context, *CustomerByUserNameRequest, *CustomerResponse) error
 	VerifyPermission(context.Context, *VerifyPermissionRequest, *VerifyPermissionResponse) error
 	CountCustomer(context.Context, *empty.Empty, *wrappers.Int64Value) error
+	//rpc VerifyPermissionFromContext(VerifyPermissionRequest) returns (VerifyPermissionResponse) {}
+	GetDeviceToken(context.Context, *CustomerRequest, *DeviceTokenResponse) error
 }
 
 func RegisterAuthenSvcHandler(s server.Server, hdlr AuthenSvcHandler, opts ...server.HandlerOption) error {
@@ -128,6 +142,7 @@ func RegisterAuthenSvcHandler(s server.Server, hdlr AuthenSvcHandler, opts ...se
 		GetCustomerByEmail(ctx context.Context, in *CustomerByUserNameRequest, out *CustomerResponse) error
 		VerifyPermission(ctx context.Context, in *VerifyPermissionRequest, out *VerifyPermissionResponse) error
 		CountCustomer(ctx context.Context, in *empty.Empty, out *wrappers.Int64Value) error
+		GetDeviceToken(ctx context.Context, in *CustomerRequest, out *DeviceTokenResponse) error
 	}
 	type AuthenSvc struct {
 		authenSvc
@@ -158,4 +173,8 @@ func (h *authenSvcHandler) VerifyPermission(ctx context.Context, in *VerifyPermi
 
 func (h *authenSvcHandler) CountCustomer(ctx context.Context, in *empty.Empty, out *wrappers.Int64Value) error {
 	return h.AuthenSvcHandler.CountCustomer(ctx, in, out)
+}
+
+func (h *authenSvcHandler) GetDeviceToken(ctx context.Context, in *CustomerRequest, out *DeviceTokenResponse) error {
+	return h.AuthenSvcHandler.GetDeviceToken(ctx, in, out)
 }

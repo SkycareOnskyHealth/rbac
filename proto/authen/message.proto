@@ -10,6 +10,7 @@ service AuthenSvc {
 	rpc VerifyPermission(VerifyPermissionRequest) returns (VerifyPermissionResponse) {}
     rpc CountCustomer (google.protobuf.Empty) returns (google.protobuf.Int64Value);
 	//rpc VerifyPermissionFromContext(VerifyPermissionRequest) returns (VerifyPermissionResponse) {}
+	rpc GetDeviceToken(CustomerRequest) returns (DeviceTokenResponse) {}
 }
 message EmptyRequest {
 }
@@ -63,4 +64,15 @@ message AuthUser {
 	repeated string clients = 4;
 	string username = 5;
 	string userUuid=6;
+}
+message DeviceTokenResponse {
+	int32 user_id=1;
+	string ip=2;
+	string location=3;
+	string lat=4;
+	string long=5;
+	bool active =6;
+	bool is_main_device=7;
+	string device_token=8;
+	int32 device_type=9;
 }
