@@ -61,6 +61,7 @@ const (
 	TempHumd
 	DoorLock
 	OSLocus
+	BedSensor
 )
 
 // Mode Type constant
@@ -254,6 +255,8 @@ func (s SecurityType) String() string {
 		return "DoorLock"
 	case OSLocus:
 		return "OS Locus"
+	case BedSensor:
+		return "Bed Sensor"
 	default:
 		return "Motion"
 	}
