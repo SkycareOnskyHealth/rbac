@@ -786,23 +786,22 @@ func (m *DeviceTokenResponse) Validate() error {
 		return nil
 	}
 
-	// no validation rules for UserId
+	// no validation rules for CustomerNumber
 
-	// no validation rules for Ip
+	for idx, item := range m.GetDevices() {
+		_, _ = idx, item
 
-	// no validation rules for Location
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return DeviceTokenResponseValidationError{
+					field:  fmt.Sprintf("Devices[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
 
-	// no validation rules for Lat
-
-	// no validation rules for Long
-
-	// no validation rules for Active
-
-	// no validation rules for IsMainDevice
-
-	// no validation rules for DeviceToken
-
-	// no validation rules for DeviceType
+	}
 
 	return nil
 }
@@ -862,3 +861,86 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = DeviceTokenResponseValidationError{}
+
+// Validate checks the field values on DeviceToken with the rules defined in
+// the proto definition for this message. If any rules are violated, an error
+// is returned.
+func (m *DeviceToken) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for UserId
+
+	// no validation rules for Ip
+
+	// no validation rules for Location
+
+	// no validation rules for Lat
+
+	// no validation rules for Long
+
+	// no validation rules for Active
+
+	// no validation rules for IsMainDevice
+
+	// no validation rules for DeviceToken
+
+	// no validation rules for DeviceType
+
+	return nil
+}
+
+// DeviceTokenValidationError is the validation error returned by
+// DeviceToken.Validate if the designated constraints aren't met.
+type DeviceTokenValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeviceTokenValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeviceTokenValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeviceTokenValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeviceTokenValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeviceTokenValidationError) ErrorName() string { return "DeviceTokenValidationError" }
+
+// Error satisfies the builtin error interface
+func (e DeviceTokenValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeviceToken.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeviceTokenValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeviceTokenValidationError{}

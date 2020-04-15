@@ -66,6 +66,10 @@ message AuthUser {
 	string userUuid=6;
 }
 message DeviceTokenResponse {
+	string customer_number=1;
+	repeated DeviceToken devices =2;
+}
+message DeviceToken {
 	int32 user_id=1;
 	string ip=2;
 	string location=3;
