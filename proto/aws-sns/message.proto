@@ -2,10 +2,13 @@ syntax = "proto3";
 
 package aws_sns;
 
+import "github.com/micro/go-micro/api/proto/api.proto";
+
 
 service AWSSNS {
     rpc Publish (PublishInput) returns (PublishOutput);
     rpc Endpoint (CreateEndpointRequest) returns (CreateEndpointResponse);
+    rpc PublishAPI (go.api.Request) returns (go.api.Response);
 }
 
 message TargetARN {
