@@ -43,6 +43,7 @@ type SystemSvcService interface {
 	HistoryBySerial(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 	HeartRateStatistic(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 	SnoringStatistic(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
+	SleepStatistic(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 }
 
 type systemSvcService struct {
@@ -143,6 +144,16 @@ func (c *systemSvcService) SnoringStatistic(ctx context.Context, in *proto1.Requ
 	return out, nil
 }
 
+func (c *systemSvcService) SleepStatistic(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error) {
+	req := c.c.NewRequest(c.name, "SystemSvc.SleepStatistic", in)
+	out := new(proto1.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for SystemSvc service
 
 type SystemSvcHandler interface {
@@ -154,6 +165,7 @@ type SystemSvcHandler interface {
 	HistoryBySerial(context.Context, *proto1.Request, *proto1.Response) error
 	HeartRateStatistic(context.Context, *proto1.Request, *proto1.Response) error
 	SnoringStatistic(context.Context, *proto1.Request, *proto1.Response) error
+	SleepStatistic(context.Context, *proto1.Request, *proto1.Response) error
 }
 
 func RegisterSystemSvcHandler(s server.Server, hdlr SystemSvcHandler, opts ...server.HandlerOption) error {
@@ -166,6 +178,7 @@ func RegisterSystemSvcHandler(s server.Server, hdlr SystemSvcHandler, opts ...se
 		HistoryBySerial(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 		HeartRateStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 		SnoringStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error
+		SleepStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 	}
 	type SystemSvc struct {
 		systemSvc
@@ -208,4 +221,8 @@ func (h *systemSvcHandler) HeartRateStatistic(ctx context.Context, in *proto1.Re
 
 func (h *systemSvcHandler) SnoringStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
 	return h.SystemSvcHandler.SnoringStatistic(ctx, in, out)
+}
+
+func (h *systemSvcHandler) SleepStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
+	return h.SystemSvcHandler.SleepStatistic(ctx, in, out)
 }
