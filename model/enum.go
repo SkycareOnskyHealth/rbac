@@ -309,6 +309,12 @@ const (
 	OSLocusSOS
 	LowBattery
 	Vibration
+	BedSensorSOS
+	BedSensorHeartStop
+	BedSensorBreathStop
+	BedSensorTachycardia
+	BedSensorBradycardia
+	BedSensorEpilepsy
 	Complex
 )
 
@@ -344,6 +350,18 @@ func (s NotificationType) String() string {
 		return "LowBattery"
 	case Vibration:
 		return "Vibration"
+	case BedSensorSOS:
+		return "BedSensorSOS"
+	case BedSensorHeartStop:
+		return "BedSensorHeartStop"
+	case BedSensorBreathStop:
+		return "BedSensorBreathStop"
+	case BedSensorTachycardia:
+		return "BedSensorTachycardia"
+	case BedSensorBradycardia:
+		return "BedSensorBradycardia"
+	case BedSensorEpilepsy:
+		return "BedSensorEpilepsy"
 	default:
 		return "Simple"
 	}
