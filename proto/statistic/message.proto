@@ -13,4 +13,5 @@ service SystemSvc {
   rpc SnoringStatistic (go.api.Request) returns (go.api.Response);
   rpc SleepStatistic (go.api.Request) returns (go.api.Response);
   rpc SleepMonthStatistic (go.api.Request) returns (go.api.Response);
+  rpc SleepWeekStatistic (go.api.Request) returns (go.api.Response);
 }

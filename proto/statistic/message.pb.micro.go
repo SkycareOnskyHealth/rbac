@@ -45,6 +45,7 @@ type SystemSvcService interface {
 	SnoringStatistic(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 	SleepStatistic(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 	SleepMonthStatistic(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
+	SleepWeekStatistic(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 }
 
 type systemSvcService struct {
@@ -165,6 +166,16 @@ func (c *systemSvcService) SleepMonthStatistic(ctx context.Context, in *proto1.R
 	return out, nil
 }
 
+func (c *systemSvcService) SleepWeekStatistic(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error) {
+	req := c.c.NewRequest(c.name, "SystemSvc.SleepWeekStatistic", in)
+	out := new(proto1.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for SystemSvc service
 
 type SystemSvcHandler interface {
@@ -178,6 +189,7 @@ type SystemSvcHandler interface {
 	SnoringStatistic(context.Context, *proto1.Request, *proto1.Response) error
 	SleepStatistic(context.Context, *proto1.Request, *proto1.Response) error
 	SleepMonthStatistic(context.Context, *proto1.Request, *proto1.Response) error
+	SleepWeekStatistic(context.Context, *proto1.Request, *proto1.Response) error
 }
 
 func RegisterSystemSvcHandler(s server.Server, hdlr SystemSvcHandler, opts ...server.HandlerOption) error {
@@ -192,6 +204,7 @@ func RegisterSystemSvcHandler(s server.Server, hdlr SystemSvcHandler, opts ...se
 		SnoringStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 		SleepStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 		SleepMonthStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error
+		SleepWeekStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 	}
 	type SystemSvc struct {
 		systemSvc
@@ -242,4 +255,8 @@ func (h *systemSvcHandler) SleepStatistic(ctx context.Context, in *proto1.Reques
 
 func (h *systemSvcHandler) SleepMonthStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
 	return h.SystemSvcHandler.SleepMonthStatistic(ctx, in, out)
+}
+
+func (h *systemSvcHandler) SleepWeekStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
+	return h.SystemSvcHandler.SleepWeekStatistic(ctx, in, out)
 }
