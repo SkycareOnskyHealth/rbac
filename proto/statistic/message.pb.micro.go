@@ -46,6 +46,8 @@ type SystemSvcService interface {
 	SleepStatistic(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 	SleepMonthStatistic(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 	SleepWeekStatistic(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
+	BedSensorLog(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
+	TimeLine(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 }
 
 type systemSvcService struct {
@@ -176,6 +178,26 @@ func (c *systemSvcService) SleepWeekStatistic(ctx context.Context, in *proto1.Re
 	return out, nil
 }
 
+func (c *systemSvcService) BedSensorLog(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error) {
+	req := c.c.NewRequest(c.name, "SystemSvc.BedSensorLog", in)
+	out := new(proto1.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemSvcService) TimeLine(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error) {
+	req := c.c.NewRequest(c.name, "SystemSvc.TimeLine", in)
+	out := new(proto1.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for SystemSvc service
 
 type SystemSvcHandler interface {
@@ -190,6 +212,8 @@ type SystemSvcHandler interface {
 	SleepStatistic(context.Context, *proto1.Request, *proto1.Response) error
 	SleepMonthStatistic(context.Context, *proto1.Request, *proto1.Response) error
 	SleepWeekStatistic(context.Context, *proto1.Request, *proto1.Response) error
+	BedSensorLog(context.Context, *proto1.Request, *proto1.Response) error
+	TimeLine(context.Context, *proto1.Request, *proto1.Response) error
 }
 
 func RegisterSystemSvcHandler(s server.Server, hdlr SystemSvcHandler, opts ...server.HandlerOption) error {
@@ -205,6 +229,8 @@ func RegisterSystemSvcHandler(s server.Server, hdlr SystemSvcHandler, opts ...se
 		SleepStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 		SleepMonthStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 		SleepWeekStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error
+		BedSensorLog(ctx context.Context, in *proto1.Request, out *proto1.Response) error
+		TimeLine(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 	}
 	type SystemSvc struct {
 		systemSvc
@@ -259,4 +285,12 @@ func (h *systemSvcHandler) SleepMonthStatistic(ctx context.Context, in *proto1.R
 
 func (h *systemSvcHandler) SleepWeekStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
 	return h.SystemSvcHandler.SleepWeekStatistic(ctx, in, out)
+}
+
+func (h *systemSvcHandler) BedSensorLog(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
+	return h.SystemSvcHandler.BedSensorLog(ctx, in, out)
+}
+
+func (h *systemSvcHandler) TimeLine(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
+	return h.SystemSvcHandler.TimeLine(ctx, in, out)
 }
