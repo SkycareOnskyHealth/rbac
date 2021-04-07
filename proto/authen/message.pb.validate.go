@@ -271,6 +271,59 @@ func (m *CustomerResponse) Validate() error {
 		}
 	}
 
+	// no validation rules for Active
+
+	if v, ok := interface{}(m.GetBirthDay()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CustomerResponseValidationError{
+				field:  "BirthDay",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Gender
+
+	for idx, item := range m.GetPhones() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CustomerResponseValidationError{
+					field:  fmt.Sprintf("Phones[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Weight
+
+	// no validation rules for Height
+
+	if v, ok := interface{}(m.GetEmergencySetting()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CustomerResponseValidationError{
+				field:  "EmergencySetting",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetLocale()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CustomerResponseValidationError{
+				field:  "Locale",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	return nil
 }
 
@@ -327,6 +380,221 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = CustomerResponseValidationError{}
+
+// Validate checks the field values on Locale with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *Locale) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Timezone
+
+	// no validation rules for Default
+
+	// no validation rules for Current
+
+	return nil
+}
+
+// LocaleValidationError is the validation error returned by Locale.Validate if
+// the designated constraints aren't met.
+type LocaleValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LocaleValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LocaleValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LocaleValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LocaleValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LocaleValidationError) ErrorName() string { return "LocaleValidationError" }
+
+// Error satisfies the builtin error interface
+func (e LocaleValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLocale.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LocaleValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LocaleValidationError{}
+
+// Validate checks the field values on EmergencySetting with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *EmergencySetting) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Name
+
+	// no validation rules for Enabled
+
+	return nil
+}
+
+// EmergencySettingValidationError is the validation error returned by
+// EmergencySetting.Validate if the designated constraints aren't met.
+type EmergencySettingValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e EmergencySettingValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e EmergencySettingValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e EmergencySettingValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e EmergencySettingValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e EmergencySettingValidationError) ErrorName() string { return "EmergencySettingValidationError" }
+
+// Error satisfies the builtin error interface
+func (e EmergencySettingValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sEmergencySetting.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = EmergencySettingValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = EmergencySettingValidationError{}
+
+// Validate checks the field values on Phone with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *Phone) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Name
+
+	// no validation rules for PhoneNumber
+
+	// no validation rules for SmsEnable
+
+	// no validation rules for CallEnable
+
+	// no validation rules for IsActive
+
+	// no validation rules for IsCareTaker
+
+	return nil
+}
+
+// PhoneValidationError is the validation error returned by Phone.Validate if
+// the designated constraints aren't met.
+type PhoneValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PhoneValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PhoneValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PhoneValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PhoneValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PhoneValidationError) ErrorName() string { return "PhoneValidationError" }
+
+// Error satisfies the builtin error interface
+func (e PhoneValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPhone.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PhoneValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PhoneValidationError{}
 
 // Validate checks the field values on CustomerSetting with the rules defined
 // in the proto definition for this message. If any rules are violated, an

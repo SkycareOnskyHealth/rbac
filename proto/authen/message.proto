@@ -2,6 +2,8 @@ syntax = "proto3";
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
 
 service AuthenSvc {
 	rpc GetCustomer(CustomerRequest) returns (CustomerResponse) {}
@@ -30,8 +32,33 @@ message CustomerResponse {
 	string address2 = 7;
 	string email = 8;
 	CustomerSetting setting = 9;
+	bool active = 10;
+	google.protobuf.Timestamp birth_day = 11;
+	int32 gender = 12;
+	repeated Phone phones = 13;
+	float weight = 14;
+	float height = 15;
+	EmergencySetting emergency_setting = 16;
+	Locale locale = 17;
 }
-
+message Locale {
+	string timezone = 1;
+	string default = 2;
+	string current = 3;
+	repeated string availables = 4;
+}
+message EmergencySetting {
+	string name = 1;
+	bool enabled = 2;
+}
+message Phone {
+	string name = 1;
+	string phoneNumber = 2;
+	bool smsEnable = 3;
+	bool callEnable = 4;
+	bool isActive = 5;
+	bool isCareTaker = 6;
+}
 message CustomerSetting {
 	int32 id =1;
 	bool isAllowRegister=2;

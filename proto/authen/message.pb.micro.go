@@ -7,14 +7,16 @@ import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
 	empty "github.com/golang/protobuf/ptypes/empty"
+	_ "github.com/golang/protobuf/ptypes/timestamp"
 	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	math "math"
 )
 
 import (
 	context "context"
-	client "github.com/micro/go-micro/client"
-	server "github.com/micro/go-micro/server"
+	api "github.com/go-iot-platform/go-micro/api"
+	client "github.com/go-iot-platform/go-micro/client"
+	server "github.com/go-iot-platform/go-micro/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -29,9 +31,16 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 // Reference imports to suppress errors if they are not otherwise used.
+var _ api.Endpoint
 var _ context.Context
 var _ client.Option
 var _ server.Option
+
+// Api Endpoints for AuthenSvc service
+
+func NewAuthenSvcEndpoints() []*api.Endpoint {
+	return []*api.Endpoint{}
+}
 
 // Client API for AuthenSvc service
 
@@ -51,12 +60,6 @@ type authenSvcService struct {
 }
 
 func NewAuthenSvcService(name string, c client.Client) AuthenSvcService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "authensvc"
-	}
 	return &authenSvcService{
 		c:    c,
 		name: name,
