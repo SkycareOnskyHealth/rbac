@@ -14,9 +14,9 @@ import (
 
 import (
 	context "context"
-	api "github.com/go-iot-platform/go-micro/api"
-	client "github.com/go-iot-platform/go-micro/client"
-	server "github.com/go-iot-platform/go-micro/server"
+	api "github.com/micro/go-micro/api"
+	client "github.com/micro/go-micro/client"
+	server "github.com/micro/go-micro/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

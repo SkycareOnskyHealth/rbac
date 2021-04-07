@@ -15,4 +15,5 @@ require (
 	github.com/onskycloud/errors v1.1.1
 	github.com/onskycloud/go-redis v0.0.0-20191119155426-ac166b6cc64f
 	github.com/onskycloud/resource-helper v1.0.2
+	google.golang.org/protobuf v1.25.0
 )
