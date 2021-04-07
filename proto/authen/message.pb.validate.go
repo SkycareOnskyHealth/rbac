@@ -529,15 +529,27 @@ func (m *Phone) Validate() error {
 
 	// no validation rules for Name
 
-	// no validation rules for PhoneNumber
+	// no validation rules for Phone
 
-	// no validation rules for SmsEnable
-
-	// no validation rules for CallEnable
+	// no validation rules for IsMaster
 
 	// no validation rules for IsActive
 
+	// no validation rules for IsMobile
+
+	// no validation rules for IsSmsEnabled
+
+	// no validation rules for IsCallEnabled
+
+	// no validation rules for Timezone
+
+	// no validation rules for CountryPrefix
+
+	// no validation rules for FullNumber
+
 	// no validation rules for IsCareTaker
+
+	// no validation rules for Locale
 
 	return nil
 }

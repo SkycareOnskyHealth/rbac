@@ -53,11 +53,18 @@ message EmergencySetting {
 }
 message Phone {
 	string name = 1;
-	string phoneNumber = 2;
-	bool smsEnable = 3;
-	bool callEnable = 4;
-	bool isActive = 5;
-	bool isCareTaker = 6;
+	string phone = 2;
+	bool isMaster = 3;
+	bool isActive = 4;
+	bool isMobile = 5;
+	bool isSmsEnabled = 6;
+	bool isCallEnabled = 7;
+	string timezone = 8;
+	string countryPrefix = 9;
+	string fullNumber = 10;
+	bool isCareTaker = 11;
+	string locale = 12;
+
 }
 message CustomerSetting {
 	int32 id =1;
