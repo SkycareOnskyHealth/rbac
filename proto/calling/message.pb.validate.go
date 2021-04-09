@@ -575,9 +575,19 @@ func (m *ClientConfig) Validate() error {
 		return nil
 	}
 
+	// no validation rules for CustomerNumber
+
 	// no validation rules for Alias
 
-	// no validation rules for CustomerNumber
+	// no validation rules for Mobile
+
+	// no validation rules for FirstName
+
+	// no validation rules for LastName
+
+	// no validation rules for Address1
+
+	// no validation rules for Address2
 
 	// no validation rules for Email
 
@@ -591,15 +601,58 @@ func (m *ClientConfig) Validate() error {
 		}
 	}
 
-	// no validation rules for Address1
+	// no validation rules for Active
 
-	// no validation rules for Address2
+	if v, ok := interface{}(m.GetBirthDay()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ClientConfigValidationError{
+				field:  "BirthDay",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
-	// no validation rules for FirstName
+	// no validation rules for Gender
 
-	// no validation rules for LastName
+	for idx, item := range m.GetPhones() {
+		_, _ = idx, item
 
-	// no validation rules for Mobile
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ClientConfigValidationError{
+					field:  fmt.Sprintf("Phones[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Weight
+
+	// no validation rules for Height
+
+	if v, ok := interface{}(m.GetEmergencySetting()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ClientConfigValidationError{
+				field:  "EmergencySetting",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetLocale()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ClientConfigValidationError{
+				field:  "Locale",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	return nil
 }
@@ -658,9 +711,79 @@ var _ interface {
 	ErrorName() string
 } = ClientConfigValidationError{}
 
-// Validate checks the field values on Setting with the rules defined in the
-// proto definition for this message. If any rules are violated, an error is returned.
-func (m *Setting) Validate() error {
+// Validate checks the field values on EmergencySetting with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *EmergencySetting) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Name
+
+	// no validation rules for Enabled
+
+	return nil
+}
+
+// EmergencySettingValidationError is the validation error returned by
+// EmergencySetting.Validate if the designated constraints aren't met.
+type EmergencySettingValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e EmergencySettingValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e EmergencySettingValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e EmergencySettingValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e EmergencySettingValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e EmergencySettingValidationError) ErrorName() string { return "EmergencySettingValidationError" }
+
+// Error satisfies the builtin error interface
+func (e EmergencySettingValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sEmergencySetting.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = EmergencySettingValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = EmergencySettingValidationError{}
+
+// Validate checks the field values on CustomerSetting with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *CustomerSetting) Validate() error {
 	if m == nil {
 		return nil
 	}
@@ -669,14 +792,34 @@ func (m *Setting) Validate() error {
 
 	// no validation rules for IsAllowRegister
 
+	if v, ok := interface{}(m.GetSmtp()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CustomerSettingValidationError{
+				field:  "Smtp",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetPayment()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CustomerSettingValidationError{
+				field:  "Payment",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	// no validation rules for Other
 
 	return nil
 }
 
-// SettingValidationError is the validation error returned by Setting.Validate
-// if the designated constraints aren't met.
-type SettingValidationError struct {
+// CustomerSettingValidationError is the validation error returned by
+// CustomerSetting.Validate if the designated constraints aren't met.
+type CustomerSettingValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -684,22 +827,22 @@ type SettingValidationError struct {
 }
 
 // Field function returns field value.
-func (e SettingValidationError) Field() string { return e.field }
+func (e CustomerSettingValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SettingValidationError) Reason() string { return e.reason }
+func (e CustomerSettingValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SettingValidationError) Cause() error { return e.cause }
+func (e CustomerSettingValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SettingValidationError) Key() bool { return e.key }
+func (e CustomerSettingValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SettingValidationError) ErrorName() string { return "SettingValidationError" }
+func (e CustomerSettingValidationError) ErrorName() string { return "CustomerSettingValidationError" }
 
 // Error satisfies the builtin error interface
-func (e SettingValidationError) Error() string {
+func (e CustomerSettingValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -711,14 +854,14 @@ func (e SettingValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSetting.%s: %s%s",
+		"invalid %sCustomerSetting.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SettingValidationError{}
+var _ error = CustomerSettingValidationError{}
 
 var _ interface {
 	Field() string
@@ -726,21 +869,94 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SettingValidationError{}
+} = CustomerSettingValidationError{}
 
-// Validate checks the field values on PhoneNumber with the rules defined in
-// the proto definition for this message. If any rules are violated, an error
-// is returned.
-func (m *PhoneNumber) Validate() error {
+// Validate checks the field values on Locale with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *Locale) Validate() error {
 	if m == nil {
 		return nil
 	}
 
+	// no validation rules for Timezone
+
+	// no validation rules for Default
+
+	// no validation rules for Current
+
+	return nil
+}
+
+// LocaleValidationError is the validation error returned by Locale.Validate if
+// the designated constraints aren't met.
+type LocaleValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LocaleValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LocaleValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LocaleValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LocaleValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LocaleValidationError) ErrorName() string { return "LocaleValidationError" }
+
+// Error satisfies the builtin error interface
+func (e LocaleValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLocale.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LocaleValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LocaleValidationError{}
+
+// Validate checks the field values on Phone with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *Phone) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Name
+
 	// no validation rules for Phone
 
-	// no validation rules for Locale
-
 	// no validation rules for IsMaster
+
+	// no validation rules for IsActive
+
+	// no validation rules for IsMobile
 
 	// no validation rules for IsSmsEnabled
 
@@ -748,12 +964,20 @@ func (m *PhoneNumber) Validate() error {
 
 	// no validation rules for Timezone
 
+	// no validation rules for CountryPrefix
+
+	// no validation rules for FullNumber
+
+	// no validation rules for IsCareTaker
+
+	// no validation rules for Locale
+
 	return nil
 }
 
-// PhoneNumberValidationError is the validation error returned by
-// PhoneNumber.Validate if the designated constraints aren't met.
-type PhoneNumberValidationError struct {
+// PhoneValidationError is the validation error returned by Phone.Validate if
+// the designated constraints aren't met.
+type PhoneValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -761,22 +985,22 @@ type PhoneNumberValidationError struct {
 }
 
 // Field function returns field value.
-func (e PhoneNumberValidationError) Field() string { return e.field }
+func (e PhoneValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e PhoneNumberValidationError) Reason() string { return e.reason }
+func (e PhoneValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e PhoneNumberValidationError) Cause() error { return e.cause }
+func (e PhoneValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e PhoneNumberValidationError) Key() bool { return e.key }
+func (e PhoneValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e PhoneNumberValidationError) ErrorName() string { return "PhoneNumberValidationError" }
+func (e PhoneValidationError) ErrorName() string { return "PhoneValidationError" }
 
 // Error satisfies the builtin error interface
-func (e PhoneNumberValidationError) Error() string {
+func (e PhoneValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -788,14 +1012,14 @@ func (e PhoneNumberValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sPhoneNumber.%s: %s%s",
+		"invalid %sPhone.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = PhoneNumberValidationError{}
+var _ error = PhoneValidationError{}
 
 var _ interface {
 	Field() string
@@ -803,7 +1027,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = PhoneNumberValidationError{}
+} = PhoneValidationError{}
 
 // Validate checks the field values on CallingResponse with the rules defined
 // in the proto definition for this message. If any rules are violated, an
@@ -1480,3 +1704,140 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UpdateMessageRequestValidationError{}
+
+// Validate checks the field values on SMTPConfig with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *SMTPConfig) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Host
+
+	// no validation rules for Port
+
+	// no validation rules for Password
+
+	// no validation rules for Account
+
+	return nil
+}
+
+// SMTPConfigValidationError is the validation error returned by
+// SMTPConfig.Validate if the designated constraints aren't met.
+type SMTPConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SMTPConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SMTPConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SMTPConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SMTPConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SMTPConfigValidationError) ErrorName() string { return "SMTPConfigValidationError" }
+
+// Error satisfies the builtin error interface
+func (e SMTPConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSMTPConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SMTPConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SMTPConfigValidationError{}
+
+// Validate checks the field values on PaymentConfig with the rules defined in
+// the proto definition for this message. If any rules are violated, an error
+// is returned.
+func (m *PaymentConfig) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+// PaymentConfigValidationError is the validation error returned by
+// PaymentConfig.Validate if the designated constraints aren't met.
+type PaymentConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PaymentConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PaymentConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PaymentConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PaymentConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PaymentConfigValidationError) ErrorName() string { return "PaymentConfigValidationError" }
+
+// Error satisfies the builtin error interface
+func (e PaymentConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPaymentConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PaymentConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PaymentConfigValidationError{}

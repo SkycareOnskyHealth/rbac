@@ -6,12 +6,14 @@ package calling
 import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
+	_ "github.com/golang/protobuf/ptypes/timestamp"
 	proto1 "github.com/micro/go-micro/api/proto"
 	math "math"
 )
 
 import (
 	context "context"
+	api "github.com/micro/go-micro/api"
 	client "github.com/micro/go-micro/client"
 	server "github.com/micro/go-micro/server"
 )
@@ -28,9 +30,16 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 // Reference imports to suppress errors if they are not otherwise used.
+var _ api.Endpoint
 var _ context.Context
 var _ client.Option
 var _ server.Option
+
+// Api Endpoints for SecurityCalling service
+
+func NewSecurityCallingEndpoints() []*api.Endpoint {
+	return []*api.Endpoint{}
+}
 
 // Client API for SecurityCalling service
 
@@ -46,12 +55,6 @@ type securityCallingService struct {
 }
 
 func NewSecurityCallingService(name string, c client.Client) SecurityCallingService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "calling"
-	}
 	return &securityCallingService{
 		c:    c,
 		name: name,
@@ -125,6 +128,12 @@ func (h *securityCallingHandler) CallAndMessageStatistic(ctx context.Context, in
 	return h.SecurityCallingHandler.CallAndMessageStatistic(ctx, in, out)
 }
 
+// Api Endpoints for SecurityCallingSvc service
+
+func NewSecurityCallingSvcEndpoints() []*api.Endpoint {
+	return []*api.Endpoint{}
+}
+
 // Client API for SecurityCallingSvc service
 
 type SecurityCallingSvcService interface {
@@ -157,12 +166,6 @@ type securityCallingSvcService struct {
 }
 
 func NewSecurityCallingSvcService(name string, c client.Client) SecurityCallingSvcService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "calling"
-	}
 	return &securityCallingSvcService{
 		c:    c,
 		name: name,

@@ -3,6 +3,8 @@ syntax = "proto3";
 package calling;
 
 import "github.com/micro/go-micro/api/proto/api.proto";
+// option go_package = "github.com/micro/go-micro/api/proto;go_api";
+import "google/protobuf/timestamp.proto";
 
 service SecurityCalling {
   rpc UpdateCall(go.api.Request) returns(go.api.Response) { }
@@ -88,29 +90,54 @@ message Property {
 }
 // client config
 message ClientConfig {
-  string alias = 1;
-  string customerNumber =2;
-  string email = 3;
-  Setting setting =4;
-
-  string address1 = 5;
-  string address2 = 6;
-  string firstName = 7;
-  string lastName = 8;
-  string mobile = 9;
+  string customerNumber = 1;
+	string alias = 2;
+	string mobile = 3;
+	string firstName = 4;
+	string lastName = 5;
+	string address1 = 6;
+	string address2 = 7;
+	string email = 8;
+	CustomerSetting setting = 9;
+	bool active = 10;
+	google.protobuf.Timestamp birth_day = 11;
+	int32 gender = 12;
+	repeated Phone phones = 13;
+	float weight = 14;
+	float height = 15;
+	EmergencySetting emergency_setting = 16;
+  Locale locale = 17;
 }
-message Setting {
-  int32 id =1;
-  bool isAllowRegister=2;
-  string other =3;
+message EmergencySetting {
+	string name = 1;
+	bool enabled = 2;
 }
-message  PhoneNumber  {
-  string phone = 1;
-  string locale = 2;
-  bool isMaster = 3;
-  bool isSmsEnabled = 4;
-  bool isCallEnabled = 5;
-  string timezone = 6;
+message CustomerSetting {
+	int32 id =1;
+	bool isAllowRegister=2;
+	SMTPConfig smtp =3;
+	PaymentConfig payment=4;
+	string other =5;
+}
+message Locale {
+	string timezone = 1;
+	string default = 2;
+	string current = 3;
+	repeated string availables = 4;
+}
+message Phone {
+	string name = 1;
+	string phone = 2;
+	bool isMaster = 3;
+	bool isActive = 4;
+	bool isMobile = 5;
+	bool isSmsEnabled = 6;
+	bool isCallEnabled = 7;
+	string timezone = 8;
+	string countryPrefix = 9;
+	string fullNumber = 10;
+	bool isCareTaker = 11;
+	string locale = 12;
 }
 // response
 message CallingResponse {
@@ -176,3 +203,12 @@ message UpdateMessageRequest{
 	string NotificationID       = 11;
 	string MessageID       = 12;
 }
+message SMTPConfig{
+	string host =1;
+	int32 port =2;
+	string password =3;
+	string account =4;
+}
+message PaymentConfig {
+
+}   
