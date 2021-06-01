@@ -630,7 +630,7 @@ func (m *DataResponse) GetStatusCode() int64 {
 }
 
 func init() {
-	proto.RegisterType((*EmptyRequest)(nil), "EmptyRequest")
+	// proto.RegisterType((*EmptyRequest)(nil), "EmptyRequest")
 	proto.RegisterType((*ThingRequest)(nil), "ThingRequest")
 	proto.RegisterType((*LavieConfigRequest)(nil), "LavieConfigRequest")
 	proto.RegisterType((*ThingResponse)(nil), "ThingResponse")
