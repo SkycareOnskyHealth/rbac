@@ -13,6 +13,7 @@ import (
 
 import (
 	context "context"
+	api "github.com/micro/go-micro/api"
 	client "github.com/micro/go-micro/client"
 	server "github.com/micro/go-micro/server"
 )
