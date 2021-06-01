@@ -29,9 +29,16 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 // Reference imports to suppress errors if they are not otherwise used.
+var _ api.Endpoint
 var _ context.Context
 var _ client.Option
 var _ server.Option
+
+// Api Endpoints for IotSvc service
+
+func NewIotSvcEndpoints() []*api.Endpoint {
+	return []*api.Endpoint{}
+}
 
 // Client API for IotSvc service
 
@@ -51,12 +58,6 @@ type iotSvcService struct {
 }
 
 func NewIotSvcService(name string, c client.Client) IotSvcService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "iotsvc"
-	}
 	return &iotSvcService{
 		c:    c,
 		name: name,
