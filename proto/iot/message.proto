@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package iot;
+
 import "github.com/micro/go-micro/api/proto/api.proto";
 import "google/protobuf/wrappers.proto";
 
