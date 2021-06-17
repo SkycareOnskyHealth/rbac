@@ -49,6 +49,7 @@ type SystemSvcService interface {
 	SendObserverEmailAPI(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 	GetChartData(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 	HistoryBySerial(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
+	OfflineCount(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 	Offline(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 	HeartRateStatistic(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
 	SnoringStatistic(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error)
@@ -123,6 +124,16 @@ func (c *systemSvcService) GetChartData(ctx context.Context, in *proto1.Request,
 
 func (c *systemSvcService) HistoryBySerial(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error) {
 	req := c.c.NewRequest(c.name, "SystemSvc.HistoryBySerial", in)
+	out := new(proto1.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemSvcService) OfflineCount(ctx context.Context, in *proto1.Request, opts ...client.CallOption) (*proto1.Response, error) {
+	req := c.c.NewRequest(c.name, "SystemSvc.OfflineCount", in)
 	out := new(proto1.Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -220,6 +231,7 @@ type SystemSvcHandler interface {
 	SendObserverEmailAPI(context.Context, *proto1.Request, *proto1.Response) error
 	GetChartData(context.Context, *proto1.Request, *proto1.Response) error
 	HistoryBySerial(context.Context, *proto1.Request, *proto1.Response) error
+	OfflineCount(context.Context, *proto1.Request, *proto1.Response) error
 	Offline(context.Context, *proto1.Request, *proto1.Response) error
 	HeartRateStatistic(context.Context, *proto1.Request, *proto1.Response) error
 	SnoringStatistic(context.Context, *proto1.Request, *proto1.Response) error
@@ -238,6 +250,7 @@ func RegisterSystemSvcHandler(s server.Server, hdlr SystemSvcHandler, opts ...se
 		SendObserverEmailAPI(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 		GetChartData(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 		HistoryBySerial(ctx context.Context, in *proto1.Request, out *proto1.Response) error
+		OfflineCount(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 		Offline(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 		HeartRateStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error
 		SnoringStatistic(ctx context.Context, in *proto1.Request, out *proto1.Response) error
@@ -280,6 +293,10 @@ func (h *systemSvcHandler) GetChartData(ctx context.Context, in *proto1.Request,
 
 func (h *systemSvcHandler) HistoryBySerial(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
 	return h.SystemSvcHandler.HistoryBySerial(ctx, in, out)
+}
+
+func (h *systemSvcHandler) OfflineCount(ctx context.Context, in *proto1.Request, out *proto1.Response) error {
+	return h.SystemSvcHandler.OfflineCount(ctx, in, out)
 }
 
 func (h *systemSvcHandler) Offline(ctx context.Context, in *proto1.Request, out *proto1.Response) error {

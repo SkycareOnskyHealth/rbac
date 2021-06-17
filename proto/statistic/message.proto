@@ -11,6 +11,7 @@ service SystemSvc {
   rpc SendObserverEmailAPI (go.api.Request) returns (go.api.Response);
   rpc GetChartData(go.api.Request) returns (go.api.Response);
   rpc HistoryBySerial (go.api.Request) returns (go.api.Response);
+  rpc OfflineCount (go.api.Request) returns (go.api.Response);
   rpc Offline (go.api.Request) returns (go.api.Response);
   rpc HeartRateStatistic (go.api.Request) returns (go.api.Response);
   rpc SnoringStatistic (go.api.Request) returns (go.api.Response);
