@@ -316,10 +316,13 @@ const (
 	BedSensorBradycardia
 	BedSensorEpilepsy
 	Complex
+	BedSensorAbnormalVitalSigns
 )
 
 func (s NotificationType) String() string {
 	switch s {
+	case BedSensorAbnormalVitalSigns:
+		return "BedSensorAbnormalVitalSigns"
 	case Complex:
 		return "Complex"
 	case DoorSensor:
