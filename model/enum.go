@@ -314,13 +314,34 @@ const (
 	BedSensorBreathStop
 	BedSensorTachycardia
 	BedSensorBradycardia
-	BedSensorEpilepsy
+	BedSensorSeizure
 	Complex
 	BedSensorAbnormalVitalSigns
+	BedSensorBodyTempHeight
+	BedSensorRoomTempHeight
+	BedSensorHumidityHeight
+	BedSensorHeartRateHeight
+	BedSensorHeartRateLow
+	BedSensorBedLeaving
+	BedSensorCrying
 )
 
 func (s NotificationType) String() string {
 	switch s {
+	case BedSensorCrying:
+		return "BedSensorCrying"
+	case BedSensorBedLeaving:
+		return "BedSensorBedLeaving"
+	case BedSensorHeartRateLow:
+		return "BedSensorHeartRateLow"
+	case BedSensorHeartRateHeight:
+		return "BedSensorHeartRateHeight"
+	case BedSensorHumidityHeight:
+		return "BedSensorHumidityHeight"
+	case BedSensorRoomTempHeight:
+		return "BedSensorRoomTempHeight"
+	case BedSensorBodyTempHeight:
+		return "BedSensorBodyTempHeight"
 	case BedSensorAbnormalVitalSigns:
 		return "BedSensorAbnormalVitalSigns"
 	case Complex:
@@ -363,8 +384,8 @@ func (s NotificationType) String() string {
 		return "BedSensorTachycardia"
 	case BedSensorBradycardia:
 		return "BedSensorBradycardia"
-	case BedSensorEpilepsy:
-		return "BedSensorEpilepsy"
+	case BedSensorSeizure:
+		return "BedSensorSeizure"
 	default:
 		return "Simple"
 	}
