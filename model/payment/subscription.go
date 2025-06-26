@@ -3,7 +3,7 @@ package payment
 import (
 	"time"
 
-	"github.com/onskycloud/rbac/model"
+	"github.com/SkycareOnskyHealth/rbac/model"
 )
 
 type SubscriptionStatus uint8

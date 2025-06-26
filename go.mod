@@ -1,4 +1,4 @@
-module github.com/onskycloud/rbac
+module github.com/SkycareOnskyHealth/rbac
 
 go 1.13
 
@@ -12,9 +12,9 @@ require (
 	github.com/labstack/gommon v0.3.0 // indirect
 	github.com/micro/go-micro v1.18.0
 	github.com/mitchellh/mapstructure v1.1.2
-	github.com/onskycloud/errors v1.1.1
-	github.com/onskycloud/go-redis v0.0.0-20191119155426-ac166b6cc64f
-	github.com/onskycloud/resource-helper v1.0.2
+	github.com/SkycareOnskyHealth/errors v1.1.1
+	github.com/SkycareOnskyHealth/go-redis v0.0.0-20191119155426-ac166b6cc64f
+	github.com/SkycareOnskyHealth/resource-helper v1.0.2
 	google.golang.org/genproto v0.0.0-20200526211855-cb27e3aa2013 // indirect
 	google.golang.org/protobuf v1.26.0
 )

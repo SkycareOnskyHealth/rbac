@@ -3,7 +3,7 @@ package payment
 import (
 	"time"
 
-	"github.com/onskycloud/rbac/model"
+	"github.com/SkycareOnskyHealth/rbac/model"
 )
 
 type PackageType uint8
@@ -80,7 +80,7 @@ type ListPackageWeb struct {
 	Bought       bool        `json:"bought"`
 }
 
-//ListPackageRequest represents API list package request
+// ListPackageRequest represents API list package request
 type ListPackageRequest struct {
 	Filter string `json:"filter" `
 	Offset int    `json:"offset" `

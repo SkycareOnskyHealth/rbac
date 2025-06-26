@@ -1,7 +1,7 @@
 package payment
 
 import (
-	"github.com/onskycloud/rbac/model"
+	"github.com/SkycareOnskyHealth/rbac/model"
 )
 
 type MethodType uint
@@ -101,26 +101,26 @@ type PaymentGateway struct {
 	//Config      map[string]interface{} `json:"config" validate:"omitempty"`
 }
 
-//GetConfigRequest represent the get config request.
+// GetConfigRequest represent the get config request.
 type GetConfigRequest struct {
 	Name string `json:"name" validate:"max=50"`
 }
 
-//TopupRequest represent topup request.
+// TopupRequest represent topup request.
 type TopupRequest struct {
 	Amount             uint64 `json:"amount" validate:"required"`
 	PaymentGatewayName string `json:"payment_gateway_name" validate:"required,max=50,alphanum"`
 	PaymentMethodNonce string `json:"payment_method_nonce,required"`
 }
 
-//PaymentGatewayParam represent param jsonb field in model.
+// PaymentGatewayParam represent param jsonb field in model.
 type PaymentGatewayParam struct {
 	Key   string `json:"key"`
 	Value string `json:"value"`
 	Type  string `json:"type"`
 }
 
-//ChargeRequest represent a charge request
+// ChargeRequest represent a charge request
 type ChargeRequest struct {
 	PackageUUID        string `json:"package_uuid" validate:"uuid4"`
 	PaymentGateway     string `json:"payment_gateway" validate:"max=25,alpha"`
@@ -131,21 +131,21 @@ type ChargeRequest struct {
 	IsAutoCharge       bool   `json:"is_auto_charge"`
 }
 
-//CountFeeRequest represent a countFee request
+// CountFeeRequest represent a countFee request
 type CountFeeRequest struct {
 	PackageUUID string `json:"package_uuid" validate:"uuid4"`
 	ServiceName string `json:"service_name,omitempty" validate:"max=50"`
 	PromoCode   string `json:"promo_code,omitempty"`
 }
 
-//CountFeeResponse represent a countFee response
+// CountFeeResponse represent a countFee response
 type CountFeeResponse struct {
 	PackagePrice   string `json:"package_price"`
 	PromotionValue string `json:"promotion_value"`
 	FinalPrice     string `json:"final_price"`
 }
 
-//JobRunnerReq represent job runner request
+// JobRunnerReq represent job runner request
 type JobRunnerReq struct {
 	CustomerNumber string `json:"customer_number"`
 	PackageUUID    string `json:"package_uuid" validate:"uuid4"`

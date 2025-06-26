@@ -3,9 +3,9 @@ package authen
 import (
 	"testing"
 
-	"github.com/onskycloud/go-redis"
-	"github.com/onskycloud/rbac/model"
-	resourcehelper "github.com/onskycloud/resource-helper"
+	"github.com/SkycareOnskyHealth/go-redis"
+	"github.com/SkycareOnskyHealth/rbac/model"
+	resourcehelper "github.com/SkycareOnskyHealth/resource-helper"
 )
 
 // UserCacheKey cache key for user

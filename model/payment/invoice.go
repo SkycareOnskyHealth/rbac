@@ -1,7 +1,7 @@
 package payment
 
 import (
-	"github.com/onskycloud/rbac/model"
+	"github.com/SkycareOnskyHealth/rbac/model"
 )
 
 type InvoiceType uint

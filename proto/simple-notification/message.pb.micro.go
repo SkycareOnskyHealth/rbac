@@ -7,7 +7,7 @@ import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
 	proto1 "github.com/micro/go-micro/api/proto"
-	calling "github.com/onskycloud/rbac/proto/calling"
+	calling "github.com/SkycareOnskyHealth/rbac/proto/calling"
 	math "math"
 )
 

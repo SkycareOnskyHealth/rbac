@@ -5,14 +5,14 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/SkycareOnskyHealth/errors"
+	"github.com/SkycareOnskyHealth/go-redis"
+	"github.com/SkycareOnskyHealth/rbac/model"
+	"github.com/SkycareOnskyHealth/rbac/utl"
+	resourcehelper "github.com/SkycareOnskyHealth/resource-helper"
 	"github.com/labstack/echo"
 	"github.com/micro/go-micro/metadata"
 	"github.com/mitchellh/mapstructure"
-	"github.com/onskycloud/errors"
-	"github.com/onskycloud/go-redis"
-	"github.com/onskycloud/rbac/model"
-	"github.com/onskycloud/rbac/utl"
-	resourcehelper "github.com/onskycloud/resource-helper"
 )
 
 // ServiceName Seperate Char

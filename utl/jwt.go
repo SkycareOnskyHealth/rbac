@@ -3,9 +3,9 @@ package utl
 import (
 	"strings"
 
+	"github.com/SkycareOnskyHealth/errors"
+	"github.com/SkycareOnskyHealth/rbac/model"
 	jwt "github.com/dgrijalva/jwt-go"
-	"github.com/onskycloud/errors"
-	"github.com/onskycloud/rbac/model"
 )
 
 // ServiceName Seperate Char

@@ -1,7 +1,7 @@
 package iot
 
 import (
-	model "github.com/onskycloud/rbac/model"
+	model "github.com/SkycareOnskyHealth/rbac/model"
 )
 
 // User represents user domain model

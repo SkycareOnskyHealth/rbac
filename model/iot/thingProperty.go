@@ -1,6 +1,6 @@
 package iot
 
-import model "github.com/onskycloud/rbac/model"
+import model "github.com/SkycareOnskyHealth/rbac/model"
 
 // Datatype of a property of thing
 type DataType int8

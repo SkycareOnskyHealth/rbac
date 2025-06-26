@@ -1,7 +1,7 @@
 package policy
 
 import (
-	"github.com/onskycloud/rbac/model"
+	"github.com/SkycareOnskyHealth/rbac/model"
 )
 
 // User represents service domain model

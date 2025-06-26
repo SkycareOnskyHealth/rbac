@@ -1,7 +1,7 @@
 package payment
 
 import (
-	"github.com/onskycloud/rbac/model"
+	"github.com/SkycareOnskyHealth/rbac/model"
 )
 
 // Region represents region table.
@@ -13,7 +13,7 @@ type Region struct {
 	Currency    string `json:"currency,omitempty" validate:"len=3"`
 }
 
-//DeleteRegionRequest represent delete region request
+// DeleteRegionRequest represent delete region request
 type DeleteRegionRequest struct {
 	ID int `json:"id" validate:"min=1"`
 }

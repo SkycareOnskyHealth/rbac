@@ -1,6 +1,6 @@
 package iot
 
-import model "github.com/onskycloud/rbac/model"
+import model "github.com/SkycareOnskyHealth/rbac/model"
 
 // Certificate
 type Policy struct {
