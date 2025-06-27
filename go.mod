@@ -13,7 +13,7 @@ require (
 	github.com/micro/go-micro v1.18.0
 	github.com/mitchellh/mapstructure v1.1.2
 	github.com/SkycareOnskyHealth/errors v1.1.3
-	github.com/SkycareOnskyHealth/go-redis v1.0.4
+	github.com/SkycareOnskyHealth/go-redis v1.0.6
 	github.com/SkycareOnskyHealth/resource-helper v1.0.3
 	google.golang.org/genproto v0.0.0-20200526211855-cb27e3aa2013 // indirect
 	google.golang.org/protobuf v1.26.0
