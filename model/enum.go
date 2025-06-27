@@ -62,6 +62,7 @@ const (
 	DoorLock
 	OSLocus
 	BedSensor
+	SkyBand
 )
 
 // Mode Type constant
@@ -257,6 +258,8 @@ func (s SecurityType) String() string {
 		return "OS Locus"
 	case BedSensor:
 		return "Bed Sensor"
+	case SkyBand:
+		return "Sky Band"
 	default:
 		return "Motion"
 	}
@@ -324,6 +327,9 @@ const (
 	BedSensorHeartRateLow
 	BedSensorBedLeaving
 	BedSensorCrying
+	SkyBandSpo2Low             = 101
+	SkyBandHeartRateRateLow    = 102
+	SkyBandHeartRateRateHeight = 103
 )
 
 func (s NotificationType) String() string {
@@ -344,6 +350,12 @@ func (s NotificationType) String() string {
 		return "BedSensorBodyTempHeight"
 	case BedSensorAbnormalVitalSigns:
 		return "BedSensorAbnormalVitalSigns"
+	case SkyBandSpo2Low:
+		return "SkyBandSpo2Low"
+	case SkyBandHeartRateRateLow:
+		return "SkyBandHeartRateRateLow"
+	case SkyBandHeartRateRateHeight:
+		return "SkyBandHeartRateRateHeight"
 	case Complex:
 		return "Complex"
 	case DoorSensor:
