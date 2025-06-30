@@ -355,7 +355,7 @@ func (s NotificationType) String() string {
 	case SkyBandHeartRateRateLow:
 		return "SkyBandHeartRateRateLow"
 	case SkyBandHeartRateRateHeight:
-		return "SkyBandHeartRateRateHeight"
+		return "SkyBandHeartRateHeight"
 	case Complex:
 		return "Complex"
 	case DoorSensor:
