@@ -352,9 +352,9 @@ func (s NotificationType) String() string {
 		return "BedSensorAbnormalVitalSigns"
 	case SkyBandSpo2Low:
 		return "SkyBandSpo2Low"
-	case SkyBandHeartRateRateLow:
+	case SkyBandHeartRateLow:
 		return "SkyBandHeartRateLow"
-	case SkyBandHeartRateRateHeight:
+	case SkyBandHeartRateHeight:
 		return "SkyBandHeartRateHeight"
 	case Complex:
 		return "Complex"
