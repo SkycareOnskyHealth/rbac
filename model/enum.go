@@ -327,9 +327,9 @@ const (
 	BedSensorHeartRateLow
 	BedSensorBedLeaving
 	BedSensorCrying
-	SkyBandSpo2Low             = 101
-	SkyBandHeartRateRateLow    = 102
-	SkyBandHeartRateRateHeight = 103
+	SkyBandSpo2Low         = 101
+	SkyBandHeartRateLow    = 102
+	SkyBandHeartRateHeight = 103
 )
 
 func (s NotificationType) String() string {
@@ -353,7 +353,7 @@ func (s NotificationType) String() string {
 	case SkyBandSpo2Low:
 		return "SkyBandSpo2Low"
 	case SkyBandHeartRateRateLow:
-		return "SkyBandHeartRateRateLow"
+		return "SkyBandHeartRateLow"
 	case SkyBandHeartRateRateHeight:
 		return "SkyBandHeartRateHeight"
 	case Complex:
