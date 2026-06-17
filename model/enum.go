@@ -63,6 +63,7 @@ const (
 	OSLocus
 	BedSensor
 	SkyBand
+	SkySOS
 )
 
 // Mode Type constant
@@ -260,6 +261,8 @@ func (s SecurityType) String() string {
 		return "Bed Sensor"
 	case SkyBand:
 		return "Sky Band"
+	case SkySOS:
+		return "SkySOS"
 	default:
 		return "Motion"
 	}
@@ -330,6 +333,10 @@ const (
 	SkyBandSpo2Low         = 101
 	SkyBandHeartRateLow    = 102
 	SkyBandHeartRateHeight = 103
+	SkySOSButton           = 104
+	SkySOSFallDetection    = 105
+	SkySOSGeofenceEnter    = 106
+	SkySOSGeofenceExit     = 107
 )
 
 func (s NotificationType) String() string {
@@ -356,6 +363,14 @@ func (s NotificationType) String() string {
 		return "SkyBandHeartRateLow"
 	case SkyBandHeartRateHeight:
 		return "SkyBandHeartRateHeight"
+	case SkySOSButton:
+		return "SkySOSButton"
+	case SkySOSFallDetection:
+		return "SkySOSFallDetection"
+	case SkySOSGeofenceEnter:
+		return "SkySOSGeofenceEnter"
+	case SkySOSGeofenceExit:
+		return "SkySOSGeofenceExit"
 	case Complex:
 		return "Complex"
 	case DoorSensor:
