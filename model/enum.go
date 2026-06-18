@@ -333,7 +333,7 @@ const (
 	SkyBandSpo2Low         = 101
 	SkyBandHeartRateLow    = 102
 	SkyBandHeartRateHeight = 103
-	SkySOSButton           = 104
+	SkySOSButtonTriggered  = 104
 	SkySOSFallDetection    = 105
 	SkySOSGeofenceEnter    = 106
 	SkySOSGeofenceExit     = 107
@@ -363,8 +363,8 @@ func (s NotificationType) String() string {
 		return "SkyBandHeartRateLow"
 	case SkyBandHeartRateHeight:
 		return "SkyBandHeartRateHeight"
-	case SkySOSButton:
-		return "SkySOSButton"
+	case SkySOSButtonTriggered:
+		return "SkySOSButtonTriggered"
 	case SkySOSFallDetection:
 		return "SkySOSFallDetection"
 	case SkySOSGeofenceEnter:
