@@ -337,6 +337,8 @@ const (
 	SkySOSFallDetection    = 105
 	SkySOSGeofenceEnter    = 106
 	SkySOSGeofenceExit     = 107
+	SkySOSDeviceMoving     = 108
+	SkySOSDeviceStopped    = 109
 )
 
 func (s NotificationType) String() string {
@@ -371,6 +373,10 @@ func (s NotificationType) String() string {
 		return "SkySOSGeofenceEnter"
 	case SkySOSGeofenceExit:
 		return "SkySOSGeofenceExit"
+	case SkySOSDeviceMoving:
+		return "SkySOSDeviceMoving"
+	case SkySOSDeviceStopped:
+		return "SkySOSDeviceStopped"
 	case Complex:
 		return "Complex"
 	case DoorSensor:
